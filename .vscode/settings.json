@@ -17,6 +17,7 @@
     
     "cSpell.words": [
         "Bewiahn"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 
 }
