@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -118,8 +119,57 @@ public class ImagePuzzle extends JFrame implements ActionListener {
         } else {
             linhas = 4;
         }
+    
         int colunas = linhas;
         tabuleiro = new TabuleiroQuebraCabeca(imagemPBBorda, linhas, colunas);
+        this.getContentPane().add(tabuleiro);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    
+        this.getContentPane().remove(pnlMenu);
+    
+        SwingUtilities.invokeLater(this::loopJogo);
     
     }
+    
+    private void loopJogo() {
+        while (true) {
+            // Obter entrada do usuário para os índices das peças a serem trocadas
+            int indice1 = Integer.parseInt(JOptionPane.showInputDialog("Digite o índice da primeira peça a ser trocada:"));
+            int indice2 = Integer.parseInt(JOptionPane.showInputDialog("Digite o índice da segunda peça a ser trocada:"));
+    
+            // Trocar as peças e atualizar o tabuleiro do jogo
+            tabuleiro.trocarPecas(indice1-1, indice2-1);
+    
+            // Verificar se o jogador resolveu o quebra-cabeça
+            if (tabuleiro.estaResolvido()) {
+                JOptionPane.showMessageDialog(this, "Parabéns! Você resolveu o quebra-cabeça!", "Vitória",
+                        JOptionPane.INFORMATION_MESSAGE);
+    
+                // Oferecer ao jogador opções para jogar novamente ou retornar ao menu principal
+                Object[] opcoes = { "Jogar novamente", "Retornar ao menu" };
+                int opcao = JOptionPane.showOptionDialog(this, "O que você gostaria de fazer em seguida?",
+                        "Jogar novamente ou retornar ao menu",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
+    
+                if (opcao == 0) {
+                    // Jogar novamente
+                    this.getContentPane().removeAll();
+                    iniciarJogo();
+                    break;
+                } else {
+                    // Retornar ao menu principal
+                    this.getContentPane().removeAll();
+                    getContentPane().add(pnlMenu);
+                    this.pack();
+                    this.setLocationRelativeTo(null);
+                    this.setVisible(true);
+                    setSize(800, 600);
+                    break;
+                }
+            }
+        }
+    }
 }
+      

@@ -16,4 +16,11 @@ public class TabuleiroQuebraCabeca extends JPanel {
         this.colunas = colunas;
 
 }
+public void trocarPecas(int indice1, int indice2) {
+   
+}
+
+public boolean estaResolvido() {
+    return false;
+}
 }
