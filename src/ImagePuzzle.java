@@ -27,7 +27,7 @@ public class ImagePuzzle extends JFrame implements ActionListener {
         pnlMenu = new JPanel();
         pnlMenu.setLayout(new BoxLayout(pnlMenu, BoxLayout.Y_AXIS));
     
-        lblTitulo = new JLabel("Quebra-Cabeça de Imagem");
+        lblTitulo = new JLabel("ImagePuzzle");
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 32));
         lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
     
@@ -84,23 +84,23 @@ public class ImagePuzzle extends JFrame implements ActionListener {
     }
     
     private void iniciarJogo() {
-        // 1. Carregar uma imagem aleatória
+        // Carregar uma imagem aleatória
         Random random = new Random();
         int numeroImagem = random.nextInt(5) + 1;
         String caminhoImagem = "src\\imagens\\foto_"+ numeroImagem + ".png";
     
-        // 2. Converter a imagem para preto e branco
+        // Converter a imagem para preto e branco
         String caminhoImagemPB = "src\\imagens\\foto_pb_" + numeroImagem + ".png";
         ConversorImagemAED conversor = new ConversorImagemAED(caminhoImagem);
         conversor.converteBW(caminhoImagemPB);
     
-        // 3. Adicionar uma borda à imagem
+        // Adicionar uma borda à imagem
         String caminhoImagemPBBorda = "src\\imagens\\foto_pb_borda_" + numeroImagem + ".png";
         int tamanhoBorda = 20;
         ConversorImagemAED conversorBorda = new ConversorImagemAED(caminhoImagemPB);
         conversorBorda.criarMargem(tamanhoBorda, caminhoImagemPBBorda);
     
-        // 4. Dividir a imagem de acordo com a dificuldade e embaralhar as peças
+        // Dividir a imagem de acordo com a dificuldade e embaralhar as peças
         BufferedImage imagemPBBorda = null;
        
         try {
